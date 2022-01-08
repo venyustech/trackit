@@ -1,12 +1,15 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 import logo from '../../assets/images/logo.png'
 import { Container, Input, Button, LinkStyled } from './styles';
 
-function LoginPage({ setUserInput }) {
+function LoginPage({ setUserToken }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const navigate = useNavigate();
+
 
     function handleLogin(e) {
         e.preventDefault();
@@ -15,11 +18,12 @@ function LoginPage({ setUserInput }) {
             password: password,
         });
         promise.then(response => handleSuccess(response.data))
-        promise.catch(error => console.log(error.response))
+        promise.catch(error => alert("Tenta de novo, boy. Tem certeza que tu tem conta?"))
     }
 
     function handleSuccess(answer) {
-        setUserInput(answer);
+        setUserToken(answer.token);
+        navigate('/hoje')
     }
     return (
         <Container>
@@ -38,7 +42,7 @@ function LoginPage({ setUserInput }) {
                     placeholder="senha"
                 />
 
-                <Button onClick={() => console.log("entrou")}>Enter</Button>
+                <Button>Enter</Button>
             </form>
 
             <LinkStyled to="/cadastro">Não tem uma conta? Cadastre-se!</LinkStyled>

@@ -17,7 +17,9 @@ const Container = styled.div`
 `;
 const Input = styled.input`
     height: 40px;
-    width: 100%;
+    width: 80%;
+    margin-left: 10%;
+
     background-color: #FFFFFF;
     color: #222222;
     font-family: 'Lexend Deca', sans-serif;
@@ -35,7 +37,8 @@ const Input = styled.input`
 
 const Button = styled.button`
     height: 40px;
-    width: 100%;
+    width: 80%;
+    margin-left: 10%;
     background-color: #52B6FF;
     color: #FFFFFF;
     font-family: 'Lexend Deca', sans-serif;

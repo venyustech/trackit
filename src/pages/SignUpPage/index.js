@@ -1,16 +1,19 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
+
 
 import logo from '../../assets/images/logo.png'
 
 import { Container, Input, Button, LinkStyled } from './styles';
 
 
-function SignUpPage({ userInput, setUserInput }) {
+function SignUpPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [picture, setPicture] = useState('');
+  const navigate = useNavigate();
 
 
   function handleSignUp(e) {
@@ -22,8 +25,14 @@ function SignUpPage({ userInput, setUserInput }) {
       image: picture,
       password: password,
     });
-    promise.then(response => setUserInput(response.data))
-    promise.catch(error => console.log(error.response))
+    promise.then(response => handleSuccess(response.data))
+    promise.catch(error => alert("deu ruim! tenta de novo."))
+  }
+
+  function handleSuccess(answer) {
+    console.log(answer);
+    alert("Usuário cadastrado. Faça Login agora")
+    navigate('/');
   }
   return (
     <Container>
