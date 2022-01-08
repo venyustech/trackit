@@ -8,8 +8,8 @@ export default function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<LoginPage />} />
-                <Route path="/sign-up" element={<SignUpPage userInput={userInput} setUserInput={setUserInput} />} />
+                <Route path="/" element={<LoginPage setUserInput={setUserInput} />} />
+                <Route path="/cadastro" element={<SignUpPage userInput={userInput} setUserInput={setUserInput} />} />
             </Routes>
         </BrowserRouter>
     )

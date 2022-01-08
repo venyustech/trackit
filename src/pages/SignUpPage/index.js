@@ -17,12 +17,10 @@ function SignUpPage({ userInput, setUserInput }) {
     e.preventDefault();
 
     const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', {
-
       email: email,
       name: name,
       image: picture,
       password: password,
-
     });
     promise.then(response => setUserInput(response.data))
     promise.catch(error => console.log(error.response))

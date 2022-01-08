@@ -1,24 +1,25 @@
-// import axios from 'axios';
+import axios from 'axios';
 import React, { useState } from 'react';
 
 import logo from '../../assets/images/logo.png'
-
-
 import { Container, Input, Button, LinkStyled } from './styles';
 
-function LoginPage() {
+function LoginPage({ setUserInput }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     function handleLogin(e) {
         e.preventDefault();
-        //const promise = axios.post('link-aqui', {
-        //   email,
-        //   password,
-        // });
-        // promise.then(response => console.log(response))
-        // promise.catch(error => console.log(error.response))
-        console.log("entrei")
+        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', {
+            email: email,
+            password: password,
+        });
+        promise.then(response => handleSuccess(response.data))
+        promise.catch(error => console.log(error.response))
+    }
+
+    function handleSuccess(answer) {
+        setUserInput(answer);
     }
     return (
         <Container>
@@ -40,7 +41,7 @@ function LoginPage() {
                 <Button onClick={() => console.log("entrou")}>Enter</Button>
             </form>
 
-            <LinkStyled to="/sign-up">Não tem uma conta? Cadastre-se!</LinkStyled>
+            <LinkStyled to="/cadastro">Não tem uma conta? Cadastre-se!</LinkStyled>
         </Container>
     );
 }
