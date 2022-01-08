@@ -1,9 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Title = styled.div`
-    font-size: 36px;
-`;
+
 const Container = styled.div`
      font-family: 'Roboto', sans-serif;
     font-size: 14px;
@@ -70,4 +68,4 @@ const LinkStyled = styled(Link)`
     text-decoration-line: underline;
 
 `;
-export { Container, Title, Input, Button, LinkStyled };
+export { Container, Input, Button, LinkStyled };

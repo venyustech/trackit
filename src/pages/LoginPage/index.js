@@ -1,7 +1,10 @@
 // import axios from 'axios';
 import React, { useState } from 'react';
 
-import { Container, Title, Input, Button, LinkStyled } from './styles';
+import logo from '../../assets/images/logo.png'
+
+
+import { Container, Input, Button, LinkStyled } from './styles';
 
 function LoginPage() {
     const [email, setEmail] = useState('')
@@ -19,7 +22,8 @@ function LoginPage() {
     }
     return (
         <Container>
-            <Title >testa ai</Title>
+            <img src={logo} alt="logo TrackIt" />
+
             <form onSubmit={handleLogin}>
                 <Input type="email"
                     onChange={(e) => setEmail(e.target.value)}

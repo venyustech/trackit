@@ -1,27 +1,31 @@
+import axios from 'axios';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import logo from '../../assets/images/logo.png'
 
-import { Container, Title, Input, Button, LinkStyled } from './styles';
+import { Container, Input, Button, LinkStyled } from './styles';
 
 
-function SignUpPage() {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [picture, setPicture] = useState('')
+function SignUpPage({ userInput, setUserInput }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [picture, setPicture] = useState('');
+
 
   function handleSignUp(e) {
     e.preventDefault();
-    // const promise = axios.post('link-aqui', {
-    //   name,
-    //   email,
-    //   password,
-    // });
-    // promise.then(response => console.log(response))
-    // promise.catch(error => console.log(error.response))
-    console.log("entrei")
+
+    const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', {
+
+      email: email,
+      name: name,
+      image: picture,
+      password: password,
+
+    });
+    promise.then(response => setUserInput(response.data))
+    promise.catch(error => console.log(error.response))
   }
   return (
     <Container>
