@@ -25,12 +25,6 @@ const Header = styled.div`
 
 const Container = styled.div`
     margin: 0 17px;
-    .noHabbitsMessage{
-        font-size: 17.976px;
-        line-height: 22px;
-
-        color: #666666;
-    }
 `
 
 const Input = styled.input`
@@ -48,6 +42,8 @@ const Input = styled.input`
     }
 `;
 const SetNewHabits = styled.div`
+    display: ${(props) => (props.newHabitDisplay ? "flex" : "none")};
+
     margin-bottom: 30px;
     form{
         width: 100%;
@@ -60,30 +56,27 @@ const Buttons = styled.div`
     margin: 0 5%;
     display: flex;
     justify-content: space-between;
-    button{ 
-        all:unset;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-   
-        width: 30px;
-        height: 30px;
+`
+const ButtonDay = styled.button`
+    all:unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-        font-size: 19.976px;
-        line-height: 25px;
-
-        color: #DBDBDB;
-
-        background: #FFFFFF;
-        border: 1px solid #D5D5D5;
-        box-sizing: border-box;
-        border-radius: 5px;
-        cursor: pointer;
-        &:hover{
-            opacity: 0.5;
-        }
-
+    width: 30px;
+    height: 30px;
+    font-size: 19.976px;
+    line-height: 25px;
+    color: ${(props) => (props.isSelected ? "#FFFFFF" : "#DBDBDB")};
+    background: ${(props) => (props.isSelected ? "#CFCFCF" : "#FFFFFF")};
+    border: 1px solid #D5D5D5;
+    box-sizing: border-box;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover{
+        opacity: 0.5;
     }
+
 `
 const ButtonsSubmit = styled.div`
     margin: 0 5%;
@@ -123,5 +116,10 @@ const ButtonsSubmit = styled.div`
         color: #FFFFFF;
     }
 `
+const SetTaks = styled.div`
+    font-size: 17.976px;
+    line-height: 22px;
 
-export { Container, Header, Input, SetNewHabits, Buttons, ButtonsSubmit };
+    color: #666666;
+`
+export { Container, Header, Input, SetNewHabits, Buttons, ButtonsSubmit, ButtonDay, SetTaks };

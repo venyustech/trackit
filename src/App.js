@@ -15,7 +15,7 @@ export default function App() {
                 <Route path="/" element={<LoginPage setUserToken={setUserToken} />} />
                 <Route path="/cadastro" element={<SignUpPage />} />
                 <Route path="/hoje" element={<TodayPage userToken={userToken} />} />
-                <Route path="/habitos" element={<HabitsPage />} />
+                <Route path="/habitos" element={<HabitsPage userToken={userToken} />} />
                 <Route path="/historico" element={<HistoricPage />} />
 
             </Routes>
