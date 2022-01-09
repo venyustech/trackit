@@ -7,7 +7,8 @@ import { BsCheckSquareFill } from 'react-icons/bs'
 import { ContainerWrapper, Header, Subtitle, Title } from './styles';
 
 function TodayPage({ userToken }) {
-    const [toDoList, setToDoList] = useState('')
+    const [toDoListTAM, setToDoListTAM] = useState('')
+    const [toDoListArray, setToDoListArray] = useState([])
     console.log(userToken)
     useEffect(() => {
         const promise = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today', {
@@ -21,13 +22,14 @@ function TodayPage({ userToken }) {
         function handleSuccess(response) {
             console.log(response)
             console.log("response.data:", response.data)
-            setToDoList(response.data.length)
+            setToDoListTAM(response.data.length)
+            setToDoListArray(response.data)
         }
 
-    }, [toDoList])
+    }, [toDoListTAM])
 
-    if (toDoList === 0) {
-        console.log("items: ", toDoList)
+    if (toDoListArray === 0) {
+        console.log("items: ", toDoListArray)
 
         return (
             <>
@@ -54,15 +56,19 @@ function TodayPage({ userToken }) {
                         <Subtitle>Nenhum hábito concluído ainda</Subtitle>
                     </div>
 
+                    {toDoListArray.map((task) => (
 
-                    <div className="tasks-wrapper">
-                        <div className="tasks-infos">
-                            <h1>Ler 1 capítulo de livro</h1>
-                            <p className="current-sequence">Sequência atual: 3 dias</p>
-                            <p className="record">Seu recorde: 5 dias</p>
+                        <div className="tasks-wrapper">
+                            <div className="tasks-infos">
+                                <h1>{task.name}</h1>
+                                <p className="current-sequence">Sequência atual: {task.currentSequence} dias</p>
+                                <p className="record">Seu recorde: {task.highestSequence} dias</p>
+                            </div>
+                            <div className="check-card"> <BsCheckSquareFill></BsCheckSquareFill></div>
                         </div>
-                        <div className="check-card"> <BsCheckSquareFill></BsCheckSquareFill></div>
-                    </div>
+
+                    ))}
+
 
                 </ContainerWrapper>
             </Header>
