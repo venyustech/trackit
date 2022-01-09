@@ -17,21 +17,18 @@ const Container = styled.div`
 
 const Input = styled.input`
     height: 40px;
-    width: 80%;
-    margin-left: 10%;
+    width: 100%;
+    margin: 19px;
 
     background-color: #FFFFFF;
     color: #222222;
-    font-family: 'Lexend Deca', sans-serif;
+
     font-size:20px;
     line-height: 25px;
-    padding: 14px;
-    margin-bottom: 10px;
     border: 1px solid #D5D5D5;
     border-radius: 5px; 
     ::placeholder {
       color: #DBDBDB;
-      font-family: 'Lexend Deca', sans-serif;
     }
 `;
 

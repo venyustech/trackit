@@ -6,10 +6,37 @@ const Header = styled.div`
 const ContainerWrapper = styled.div`
     
     display: flex;
-    align-items: center;
-        
+    flex-direction: column;
+    justify-content:center ;
     margin: 16px;
     gap: 15px;
+    .tasks-wrapper{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        background-color: white;
+        border-radius: 5px;
+        padding:13px;
+
+        .tasks-infos h1{
+            font-size: 19.976px;
+            line-height: 25px;
+
+            color: #666666;
+        }
+        .tasks-infos p{
+            font-size: 12.976px;
+            line-height: 16px;
+            color: #666666;
+        }
+        svg{
+            width: 69px;
+            height: 69px;
+
+            color:#EBEBEB;
+            cursor: pointer;
+        }
+    }
 `
 const Title = styled.h1`
     font-size: 22.976px;
@@ -26,6 +53,7 @@ const Subtitle = styled.h2`
 const TitleWrapper = styled.div`
 
 `
+
 
 
 export { Header, ContainerWrapper, Title, Subtitle, TitleWrapper };

@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Footer from '../../components/Footer';
 import NavBar from '../../components/NavBar';
+import { BsCheckSquareFill } from 'react-icons/bs'
 
 import { ContainerWrapper, Header, Subtitle, Title } from './styles';
 
@@ -19,7 +20,9 @@ function TodayPage({ userToken }) {
 
         function handleSuccess(response) {
             console.log("token: ", userToken)
+            console.log("response:", response)
             console.log("response.data.length: ", response.data.length)
+
             setItems(response.data.length)
         }
 
@@ -36,9 +39,9 @@ function TodayPage({ userToken }) {
                         <div className="title-wrapper">
                             <Title>Não há tarefas ainda</Title>
                         </div>
-
                     </ContainerWrapper>
                 </Header>
+                <Footer />
             </>
         )
     }
@@ -52,9 +55,57 @@ function TodayPage({ userToken }) {
                         <Title>Segunda, 17/05</Title>
                         <Subtitle>Nenhum hábito concluído ainda</Subtitle>
                     </div>
+                    <div className="tasks-wrapper">
+                        <div className="tasks-infos">
+                            <h1>Ler 1 capítulo de livro</h1>
+                            <p className="current-sequence">Sequência atual: 3 dias</p>
+                            <p className="record">Seu recorde: 5 dias</p>
+                        </div>
+                        <div className="check-card"> <BsCheckSquareFill></BsCheckSquareFill></div>
+                    </div>
+                    <div className="tasks-wrapper">
+                        <div className="tasks-infos">
+                            <h1>Ler 1 capítulo de livro</h1>
+                            <p className="current-sequence">Sequência atual: 3 dias</p>
+                            <p className="record">Seu recorde: 5 dias</p>
+                        </div>
+                        <div className="check-card"> <BsCheckSquareFill></BsCheckSquareFill></div>
+                    </div>
+                    <div className="tasks-wrapper">
+                        <div className="tasks-infos">
+                            <h1>Ler 1 capítulo de livro</h1>
+                            <p className="current-sequence">Sequência atual: 3 dias</p>
+                            <p className="record">Seu recorde: 5 dias</p>
+                        </div>
+                        <div className="check-card"> <BsCheckSquareFill></BsCheckSquareFill></div>
+                    </div>
+                    <div className="tasks-wrapper">
+                        <div className="tasks-infos">
+                            <h1>Ler 1 capítulo de livro</h1>
+                            <p className="current-sequence">Sequência atual: 3 dias</p>
+                            <p className="record">Seu recorde: 5 dias</p>
+                        </div>
+                        <div className="check-card"> <BsCheckSquareFill></BsCheckSquareFill></div>
+                    </div>
+                    <div className="tasks-wrapper">
+                        <div className="tasks-infos">
+                            <h1>Ler 1 capítulo de livro</h1>
+                            <p className="current-sequence">Sequência atual: 3 dias</p>
+                            <p className="record">Seu recorde: 5 dias</p>
+                        </div>
+                        <div className="check-card"> <BsCheckSquareFill></BsCheckSquareFill></div>
+                    </div>
+                    <div className="tasks-wrapper">
+                        <div className="tasks-infos">
+                            <h1>Ler 1 capítulo de livro</h1>
+                            <p className="current-sequence">Sequência atual: 3 dias</p>
+                            <p className="record">Seu recorde: 5 dias</p>
+                        </div>
+                        <div className="check-card"> <BsCheckSquareFill></BsCheckSquareFill></div>
+                    </div>
                 </ContainerWrapper>
-                <Footer />
             </Header>
+            <Footer />
         </>
     )
 }

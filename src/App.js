@@ -4,7 +4,7 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import TodayPage from "./pages/TodayPage";
 import HabitsPage from "./pages/HabitsPage";
-import HistoricPage from "./components/HistoricPage";
+import HistoricPage from "./pages/HistoricPage";
 
 
 export default function App() {
