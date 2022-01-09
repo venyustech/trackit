@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Footer from '../../components/Footer';
 import NavBar from '../../components/NavBar';
 import { SiAddthis } from 'react-icons/si'
 
 import { Container, Header, Input, SetNewHabits, Buttons, ButtonsSubmit, ButtonDay, SetTaks } from './styles';
 import axios from 'axios';
-import ListHabits from '../../components/ListHabits';
+import GetTasks from '../../components/GetTasks';
 
 function HabitsPage({ userToken }) {
-    const [thereIsHabits, setThereIsHabits] = useState(false);
-    const [newHabitDisplay, setNewHabitDisplay] = useState(false);
+    const [thereIsNewTask, setThereIsNewTask] = useState(1);
+    const [newHabitDisplay, setNewHabitDisplay] = useState('');
 
     const [newHabitTitle, setNewHabitTitle] = useState('');
     const [weekDaysArray, setWeekDaysArray] = useState([])
     const [quantityOfDaysSelecteds, setQuantityOfDaysSelecteds] = useState(0);
 
     function handleNewHabits(e) {
-        alert("entrou no alerta")
         e.preventDefault();
 
         const newTask = {
@@ -35,7 +34,7 @@ function HabitsPage({ userToken }) {
         promise.catch(error => handleError(error.response));
 
         function handleSuccess(response) {
-            setThereIsHabits(true);
+            setThereIsNewTask(true);
             resetDisplay();
             console.log("token: ", userToken)
             console.log("response:", response)
@@ -67,10 +66,6 @@ function HabitsPage({ userToken }) {
             setQuantityOfDaysSelecteds(quantityOfDaysSelecteds + 1);
         }
     }
-    console.log("newHabitTitle:", newHabitTitle)
-    console.log("newHabitDay:", weekDaysArray)
-    console.log("userToken: ", userToken)
-
 
     return (
         <>
@@ -106,8 +101,7 @@ function HabitsPage({ userToken }) {
                     </form>
                 </SetNewHabits>
                 <SetTaks>
-                    {!thereIsHabits ? 'Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!' : ''}
-                    <ListHabits userToken={userToken} isThereHabits={thereIsHabits} setIsThereHabits={setThereIsHabits} />
+                    <GetTasks userToken={userToken} thereIsNewTask={thereIsNewTask} setThereIsNewTask={setThereIsNewTask} />
                 </SetTaks>
 
             </Container>
