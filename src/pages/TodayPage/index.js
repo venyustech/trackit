@@ -7,8 +7,8 @@ import { BsCheckSquareFill } from 'react-icons/bs'
 import { ContainerWrapper, Header, Subtitle, Title } from './styles';
 
 function TodayPage({ userToken }) {
-    const [items, setItems] = useState('')
-
+    const [toDoList, setToDoList] = useState('')
+    console.log(userToken)
     useEffect(() => {
         const promise = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today', {
             headers: {
@@ -16,20 +16,18 @@ function TodayPage({ userToken }) {
             }
         });
         promise.then(response => handleSuccess(response));
-        promise.catch(error => console.log(error.response));
+        promise.catch(error => console.log("erro#1: ", error.response));
 
         function handleSuccess(response) {
-            console.log("token: ", userToken)
-            console.log("response:", response)
-            console.log("response.data.length: ", response.data.length)
-
-            setItems(response.data.length)
+            console.log(response)
+            console.log("response.data:", response.data)
+            setToDoList(response.data.length)
         }
 
-    }, [userToken])
+    }, [toDoList])
 
-    if (items === 0) {
-        console.log("items: ", items)
+    if (toDoList === 0) {
+        console.log("items: ", toDoList)
 
         return (
             <>
@@ -55,6 +53,8 @@ function TodayPage({ userToken }) {
                         <Title>Segunda, 17/05</Title>
                         <Subtitle>Nenhum hábito concluído ainda</Subtitle>
                     </div>
+
+
                     <div className="tasks-wrapper">
                         <div className="tasks-infos">
                             <h1>Ler 1 capítulo de livro</h1>
@@ -63,46 +63,7 @@ function TodayPage({ userToken }) {
                         </div>
                         <div className="check-card"> <BsCheckSquareFill></BsCheckSquareFill></div>
                     </div>
-                    <div className="tasks-wrapper">
-                        <div className="tasks-infos">
-                            <h1>Ler 1 capítulo de livro</h1>
-                            <p className="current-sequence">Sequência atual: 3 dias</p>
-                            <p className="record">Seu recorde: 5 dias</p>
-                        </div>
-                        <div className="check-card"> <BsCheckSquareFill></BsCheckSquareFill></div>
-                    </div>
-                    <div className="tasks-wrapper">
-                        <div className="tasks-infos">
-                            <h1>Ler 1 capítulo de livro</h1>
-                            <p className="current-sequence">Sequência atual: 3 dias</p>
-                            <p className="record">Seu recorde: 5 dias</p>
-                        </div>
-                        <div className="check-card"> <BsCheckSquareFill></BsCheckSquareFill></div>
-                    </div>
-                    <div className="tasks-wrapper">
-                        <div className="tasks-infos">
-                            <h1>Ler 1 capítulo de livro</h1>
-                            <p className="current-sequence">Sequência atual: 3 dias</p>
-                            <p className="record">Seu recorde: 5 dias</p>
-                        </div>
-                        <div className="check-card"> <BsCheckSquareFill></BsCheckSquareFill></div>
-                    </div>
-                    <div className="tasks-wrapper">
-                        <div className="tasks-infos">
-                            <h1>Ler 1 capítulo de livro</h1>
-                            <p className="current-sequence">Sequência atual: 3 dias</p>
-                            <p className="record">Seu recorde: 5 dias</p>
-                        </div>
-                        <div className="check-card"> <BsCheckSquareFill></BsCheckSquareFill></div>
-                    </div>
-                    <div className="tasks-wrapper">
-                        <div className="tasks-infos">
-                            <h1>Ler 1 capítulo de livro</h1>
-                            <p className="current-sequence">Sequência atual: 3 dias</p>
-                            <p className="record">Seu recorde: 5 dias</p>
-                        </div>
-                        <div className="check-card"> <BsCheckSquareFill></BsCheckSquareFill></div>
-                    </div>
+
                 </ContainerWrapper>
             </Header>
             <Footer />

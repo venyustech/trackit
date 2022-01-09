@@ -17,7 +17,6 @@ function HabitsPage({ userToken }) {
 
     function handleNewHabits(e) {
         e.preventDefault();
-
         const newTask = {
             name: newHabitTitle,
             days: weekDaysArray,
@@ -36,10 +35,6 @@ function HabitsPage({ userToken }) {
         function handleSuccess(response) {
             setThereIsNewTask(true);
             resetDisplay();
-            console.log("token: ", userToken)
-            console.log("response:", response)
-            console.log("response.data.length: ", response.data.length)
-            alert("enviou com sucesso")
         }
 
         function handleError(response) {
@@ -47,7 +42,6 @@ function HabitsPage({ userToken }) {
             alert("tenta de novo boy, deu erro!");
         }
     }
-
     function resetDisplay() {
         setWeekDaysArray([]);
         setQuantityOfDaysSelecteds(0);
@@ -55,7 +49,6 @@ function HabitsPage({ userToken }) {
         setNewHabitDisplay(false);
     }
     function addNewDay(daySelected) {
-        //se já foi insediro, exclui
         if (weekDaysArray.includes(daySelected)) {
             let indexOfDaySelected = weekDaysArray.indexOf(daySelected);
             weekDaysArray.splice(indexOfDaySelected, 1);
@@ -85,7 +78,7 @@ function HabitsPage({ userToken }) {
                             value={newHabitTitle}
                         />
                         <Buttons>
-                            <ButtonDay type="button" onClick={() => addNewDay(7)} isSelected={weekDaysArray.includes(7) ? true : false}>D</ButtonDay>
+                            <ButtonDay type="button" onClick={() => addNewDay(0)} isSelected={weekDaysArray.includes(0) ? true : false}>D</ButtonDay>
                             <ButtonDay type="button" onClick={() => addNewDay(1)} isSelected={weekDaysArray.includes(1) ? true : false}>S</ButtonDay>
                             <ButtonDay type="button" onClick={() => addNewDay(2)} isSelected={weekDaysArray.includes(2) ? true : false}>T</ButtonDay>
                             <ButtonDay type="button" onClick={() => addNewDay(3)} isSelected={weekDaysArray.includes(3) ? true : false}>Q</ButtonDay>
@@ -94,7 +87,7 @@ function HabitsPage({ userToken }) {
                             <ButtonDay type="button" onClick={() => addNewDay(6)} isSelected={weekDaysArray.includes(6) ? true : false}>S</ButtonDay>
                         </Buttons>
                         <ButtonsSubmit>
-                            <button type="reset" onClick={() => resetDisplay()} className="cancel">Cancelar</button>
+                            <button type="reset" onClick={() => setNewHabitDisplay(false)} className="cancel">Cancelar</button>
                             <button className="confirm">Salvar</button>
                         </ButtonsSubmit>
 

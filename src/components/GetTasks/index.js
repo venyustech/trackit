@@ -66,7 +66,7 @@ function GetTasks({ userToken, thereIsNewTask, setThereIsNewTask }) {
                                 <div className="infos">
                                     <Title>{task.name}</Title>
                                     <WeekDays>
-                                        <Button isSelected={task.days.includes(7) ? true : false}>D</Button>
+                                        <Button isSelected={task.days.includes(0) ? true : false}>D</Button>
                                         <Button isSelected={task.days.includes(1) ? true : false}>S</Button>
                                         <Button isSelected={task.days.includes(2) ? true : false}>T</Button>
                                         <Button isSelected={task.days.includes(3) ? true : false}>Q</Button>
