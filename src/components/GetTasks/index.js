@@ -26,8 +26,6 @@ function GetTasks({ userToken, thereIsNewTask, setThereIsNewTask }) {
             console.log(error.response);
         });
     }, [thereIsNewTask]);
-    console.log("TaskList:", taskList);
-
 
     function removeTask(id, name) {
         if (window.confirm(`Excluir o habito ${name}?`)) {
@@ -39,7 +37,6 @@ function GetTasks({ userToken, thereIsNewTask, setThereIsNewTask }) {
                 }
             );
             promise.then((response) => {
-                console.log("deletado:", response)
                 setThereIsNewTask(true);
             });
 

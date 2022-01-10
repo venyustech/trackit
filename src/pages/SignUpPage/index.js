@@ -30,7 +30,6 @@ function SignUpPage() {
   }
 
   function handleSuccess(answer) {
-    console.log(answer);
     alert("Usuário cadastrado. Faça Login agora")
     navigate('/');
   }

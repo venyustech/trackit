@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 const Header = styled.div`
     padding-top: 70px; 
+    padding-bottom: 100px; 
+
 `;
 const ContainerWrapper = styled.div`
     
@@ -32,12 +34,11 @@ const ContainerWrapper = styled.div`
         svg{
             width: 69px;
             height: 69px;
-
-            color:#EBEBEB;
             cursor: pointer;
         }
     }
 `
+
 const Title = styled.h1`
     font-size: 22.976px;
     line-height: 29px;
@@ -53,7 +54,10 @@ const Subtitle = styled.h2`
 const TitleWrapper = styled.div`
 
 `
+const CheckCard = styled.div`
+    color: ${(props) => (props.isTaskChecked ? "#8fc549" : "#EBEBEB")};
+`
 
 
 
-export { Header, ContainerWrapper, Title, Subtitle, TitleWrapper };
+export { Header, ContainerWrapper, Title, Subtitle, TitleWrapper, CheckCard };

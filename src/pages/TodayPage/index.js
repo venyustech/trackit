@@ -4,12 +4,16 @@ import Footer from '../../components/Footer';
 import NavBar from '../../components/NavBar';
 import { BsCheckSquareFill } from 'react-icons/bs'
 
-import { ContainerWrapper, Header, Subtitle, Title } from './styles';
+import { ContainerWrapper, Header, Subtitle, Title, CheckCard } from './styles';
+import DateFormat from '../../components/DateFormat';
 
 function TodayPage({ userToken }) {
-    const [toDoListTAM, setToDoListTAM] = useState('')
-    const [toDoListArray, setToDoListArray] = useState([])
-    console.log(userToken)
+    const [toDoListTAM, setToDoListTAM] = useState('');
+    const [tasksSelectedTAM, setTasksSelectedTAM] = useState(0);
+
+    const [toDoListArray, setToDoListArray] = useState([]);
+    const [taskStatus, setTaskStatus] = useState(false);
+
     useEffect(() => {
         const promise = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today', {
             headers: {
@@ -17,20 +21,49 @@ function TodayPage({ userToken }) {
             }
         });
         promise.then(response => handleSuccess(response));
-        promise.catch(error => console.log("erro#1: ", error.response));
+        promise.catch(error => console.log("erro#1-TodayPage: ", error.response));
 
         function handleSuccess(response) {
-            console.log(response)
-            console.log("response.data:", response.data)
-            setToDoListTAM(response.data.length)
             setToDoListArray(response.data)
+            setToDoListTAM(response.data.length)
         }
 
-    }, [toDoListTAM])
+    }, [taskStatus])
+
+    function handleTaskStatus(id, status) {
+        if (status === false) {
+            const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`, {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${userToken}`
+                    }
+                }
+            );
+
+            promise.then((response) => {
+                console.log("adicionou");
+                console.log(response);
+                setTaskStatus(taskStatus ? false : true);
+            });
+            promise.catch((error) => console.log("error#2-TodayPage: ", error.response));
+        }
+        else {
+            const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`, {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${userToken}`
+                    }
+                }
+            );
+
+            promise.then((response) => {
+                setTaskStatus(taskStatus ? false : true);
+            });
+            promise.catch((error) => { console.log("error#3-TodayPage: ", error.response); });
+        }
+    }
 
     if (toDoListArray === 0) {
-        console.log("items: ", toDoListArray)
-
         return (
             <>
                 <NavBar />
@@ -45,6 +78,9 @@ function TodayPage({ userToken }) {
             </>
         )
     }
+    console.log("toDoListArray:", toDoListArray);
+    console.log("tasksSelectedTAM: ", tasksSelectedTAM)
+    console.log("setToDoListTAM:", toDoListTAM);
 
     return (
         <>
@@ -52,7 +88,8 @@ function TodayPage({ userToken }) {
             <Header>
                 <ContainerWrapper>
                     <div className="title-wrapper">
-                        <Title>Segunda, 17/05</Title>
+                        <Title><DateFormat />
+                        </Title>
                         <Subtitle>Nenhum hábito concluído ainda</Subtitle>
                     </div>
 
@@ -64,12 +101,12 @@ function TodayPage({ userToken }) {
                                 <p className="current-sequence">Sequência atual: {task.currentSequence} dias</p>
                                 <p className="record">Seu recorde: {task.highestSequence} dias</p>
                             </div>
-                            <div className="check-card"> <BsCheckSquareFill></BsCheckSquareFill></div>
+                            <CheckCard isTaskChecked={task.done}>
+                                <BsCheckSquareFill onClick={() => handleTaskStatus(task.id, task.done)} ></BsCheckSquareFill>
+                            </CheckCard>
                         </div>
 
                     ))}
-
-
                 </ContainerWrapper>
             </Header>
             <Footer />
