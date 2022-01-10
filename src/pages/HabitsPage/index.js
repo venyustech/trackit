@@ -15,8 +15,16 @@ function HabitsPage({ userToken }) {
     const [weekDaysArray, setWeekDaysArray] = useState([])
     const [quantityOfDaysSelecteds, setQuantityOfDaysSelecteds] = useState(0);
 
+    const [isLoading, setIsLoading] = useState(false);
+    const [inputLoading, setInputLoading] = useState("");
+
+
     function handleNewHabits(e) {
         e.preventDefault();
+
+        setIsLoading(true)
+        setInputLoading("disabled")
+
         const newTask = {
             name: newHabitTitle,
             days: weekDaysArray,
@@ -34,12 +42,16 @@ function HabitsPage({ userToken }) {
 
         function handleSuccess(response) {
             setThereIsNewTask(true);
+            setIsLoading(false);
             resetDisplay();
+            setInputLoading("")
         }
 
         function handleError(response) {
-            resetDisplay();
+            setIsLoading(false);
             alert("tenta de novo boy, deu erro!");
+            setInputLoading("")
+
         }
     }
     function resetDisplay() {
@@ -73,22 +85,23 @@ function HabitsPage({ userToken }) {
                 <SetNewHabits newHabitDisplay={newHabitDisplay}>
                     <form onSubmit={handleNewHabits}>
                         <Input type="text"
+                            disabled={inputLoading}
                             placeholder="nome do hábito"
                             onChange={(e) => setNewHabitTitle(e.target.value)}
                             value={newHabitTitle}
                         />
                         <Buttons>
-                            <ButtonDay type="button" onClick={() => addNewDay(0)} isSelected={weekDaysArray.includes(0) ? true : false}>D</ButtonDay>
-                            <ButtonDay type="button" onClick={() => addNewDay(1)} isSelected={weekDaysArray.includes(1) ? true : false}>S</ButtonDay>
-                            <ButtonDay type="button" onClick={() => addNewDay(2)} isSelected={weekDaysArray.includes(2) ? true : false}>T</ButtonDay>
-                            <ButtonDay type="button" onClick={() => addNewDay(3)} isSelected={weekDaysArray.includes(3) ? true : false}>Q</ButtonDay>
-                            <ButtonDay type="button" onClick={() => addNewDay(4)} isSelected={weekDaysArray.includes(4) ? true : false}>Q</ButtonDay>
-                            <ButtonDay type="button" onClick={() => addNewDay(5)} isSelected={weekDaysArray.includes(5) ? true : false}>S</ButtonDay>
-                            <ButtonDay type="button" onClick={() => addNewDay(6)} isSelected={weekDaysArray.includes(6) ? true : false}>S</ButtonDay>
+                            <ButtonDay type="button" disabled={inputLoading} onClick={() => addNewDay(0)} isSelected={weekDaysArray.includes(0) ? true : false}>D</ButtonDay>
+                            <ButtonDay type="button" disabled={inputLoading} onClick={() => addNewDay(1)} isSelected={weekDaysArray.includes(1) ? true : false}>S</ButtonDay>
+                            <ButtonDay type="button" disabled={inputLoading} onClick={() => addNewDay(2)} isSelected={weekDaysArray.includes(2) ? true : false}>T</ButtonDay>
+                            <ButtonDay type="button" disabled={inputLoading} onClick={() => addNewDay(3)} isSelected={weekDaysArray.includes(3) ? true : false}>Q</ButtonDay>
+                            <ButtonDay type="button" disabled={inputLoading} onClick={() => addNewDay(4)} isSelected={weekDaysArray.includes(4) ? true : false}>Q</ButtonDay>
+                            <ButtonDay type="button" disabled={inputLoading} onClick={() => addNewDay(5)} isSelected={weekDaysArray.includes(5) ? true : false}>S</ButtonDay>
+                            <ButtonDay type="button" disabled={inputLoading} onClick={() => addNewDay(6)} isSelected={weekDaysArray.includes(6) ? true : false}>S</ButtonDay>
                         </Buttons>
                         <ButtonsSubmit>
                             <button type="reset" onClick={() => setNewHabitDisplay(false)} className="cancel">Cancelar</button>
-                            <button className="confirm">Salvar</button>
+                            <button className="confirm">{isLoading ? "Loading..." : "Entrar"}</button>
                         </ButtonsSubmit>
 
                     </form>

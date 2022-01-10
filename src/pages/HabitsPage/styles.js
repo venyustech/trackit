@@ -30,7 +30,8 @@ const Container = styled.div`
 const Input = styled.input`
     height: 40px;
     width: 95%;
-    margin: 19px;
+    margin: 8px;
+    margin-top: 19px;
     color: #222222;
 
     font-size:20px;

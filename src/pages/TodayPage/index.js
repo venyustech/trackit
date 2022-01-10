@@ -8,12 +8,11 @@ import { ContainerWrapper, Header, Subtitle, Title, CheckCard } from './styles';
 import DateFormat from '../../components/DateFormat';
 
 function TodayPage({ userToken }) {
-    const [taskListTAM, setTaskListTAM] = useState('');
-    const [taskSelectedTAM, setTaskSelectedTAM] = useState(0);
     const [taskPercentualDone, setTaskPercentualDone] = useState(0);
 
     const [taskListArray, setTaskListArray] = useState([]);
     const [taskStatus, setTaskStatus] = useState(false);
+
 
 
     useEffect(() => {
@@ -26,9 +25,10 @@ function TodayPage({ userToken }) {
         promise.catch(error => console.log("erro#1-TodayPage: ", error.response));
 
         function handleSuccess(response) {
+            const newTaskListArray = response.data;
+            const newTaskListTAM = response.data.length;
             setTaskListArray(response.data)
-            setTaskListTAM(response.data.length)
-            catchSelectedsNumber();
+            catchSelectedsPercentual(newTaskListArray, newTaskListTAM);
         }
 
     }, [taskStatus])
@@ -45,7 +45,6 @@ function TodayPage({ userToken }) {
 
             promise.then((response) => {
                 console.log("adicionou");
-                console.log(response);
                 setTaskStatus(taskStatus ? false : true);
             });
             promise.catch((error) => console.log("error#2-TodayPage: ", error.response));
@@ -66,17 +65,17 @@ function TodayPage({ userToken }) {
             promise.catch((error) => { console.log("error#3-TodayPage: ", error.response); });
         }
     }
-    function catchSelectedsNumber() {
-        if (taskListTAM !== 0) {
-            const selectedsArray = []
-            taskListArray.forEach(task => {
+    function catchSelectedsPercentual(newTaskListArray, newTaskListTAM) {
+        const selectedsArray = []
+        if (newTaskListTAM !== 0) {
+            newTaskListArray.forEach(task => {
                 if (task.done === true) {
                     selectedsArray.push(task.id)
                 }
             })
-            setTaskSelectedTAM(selectedsArray.length);
         }
-        setTaskPercentualDone((taskSelectedTAM * 100) / taskListTAM)
+        const percentual = ((selectedsArray.length * 100) / newTaskListTAM).toFixed(2);
+        setTaskPercentualDone(percentual);
     }
 
     if (taskListArray === 0) {
@@ -94,7 +93,6 @@ function TodayPage({ userToken }) {
             </>
         )
     }
-    console.log("quantidade/selecionados/percentual: ", taskListTAM, taskSelectedTAM, taskPercentualDone);
 
     return (
         <>

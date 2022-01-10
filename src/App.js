@@ -5,6 +5,7 @@ import SignUpPage from "./pages/SignUpPage";
 import TodayPage from "./pages/TodayPage";
 import HabitsPage from "./pages/HabitsPage";
 import HistoricPage from "./pages/HistoricPage";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 
 export default function App() {
