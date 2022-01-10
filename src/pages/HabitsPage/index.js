@@ -7,7 +7,7 @@ import { Container, Header, Input, SetNewHabits, Buttons, ButtonsSubmit, ButtonD
 import axios from 'axios';
 import GetTasks from '../../components/GetTasks';
 
-function HabitsPage({ userToken }) {
+function HabitsPage({ userToken, taskPercentualDone, userInfos }) {
     const [thereIsNewTask, setThereIsNewTask] = useState(1);
     const [newHabitDisplay, setNewHabitDisplay] = useState('');
 
@@ -74,7 +74,7 @@ function HabitsPage({ userToken }) {
 
     return (
         <>
-            <NavBar />
+            <NavBar userInfos={userInfos} />
             <Header>
                 <div className="habits-wrapper">
                     <h1>Meus Habitos</h1>
@@ -111,7 +111,7 @@ function HabitsPage({ userToken }) {
                 </SetTaks>
 
             </Container>
-            <Footer />
+            <Footer taskPercentualDone={taskPercentualDone} />
 
         </>
     );

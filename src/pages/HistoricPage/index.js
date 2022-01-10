@@ -4,15 +4,15 @@ import NavBar from '../../components/NavBar';
 
 import { Container } from './styles';
 
-function HistoricPage() {
+function HistoricPage({ taskPercentualDone, userInfos }) {
     return (
         <>
-            <NavBar />
+            <NavBar userInfos={userInfos} />
             <Container>
                 <h1>Histórico</h1>
                 <h2>Em breve você poderá ver o histórico dos seus hábitos aqui!</h2>
             </Container>
-            <Footer />
+            <Footer taskPercentualDone={taskPercentualDone} />
         </>
     )
 }

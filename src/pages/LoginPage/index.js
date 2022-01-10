@@ -6,7 +6,7 @@ import Loader from "react-loader-spinner";
 import logo from '../../assets/images/logo.png'
 import { Container, Input, Button, LinkStyled, Loading } from './styles';
 
-function LoginPage({ setUserToken }) {
+function LoginPage({ setUserToken, setUserInfos }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate();
@@ -37,6 +37,7 @@ function LoginPage({ setUserToken }) {
 
     function handleSuccess(answer) {
         setUserToken(answer.token);
+        setUserInfos(answer.image)
         setIsLoading(false);
         setInputLoading("");
         navigate('/hoje');
@@ -64,7 +65,7 @@ function LoginPage({ setUserToken }) {
                 <Button>{isLoading ?
                     (<Loader
                         type="ThreeDots"
-                        color="#00BFFF"
+                        color="#FFFFFF"
                         height={80}
                         width={80}
 

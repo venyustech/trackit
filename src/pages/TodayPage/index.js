@@ -7,13 +7,9 @@ import { BsCheckSquareFill } from 'react-icons/bs'
 import { ContainerWrapper, Header, Subtitle, Title, CheckCard } from './styles';
 import DateFormat from '../../components/DateFormat';
 
-function TodayPage({ userToken }) {
-    const [taskPercentualDone, setTaskPercentualDone] = useState(0);
-
+function TodayPage({ userToken, taskPercentualDone, setTaskPercentualDone, userInfos }) {
     const [taskListArray, setTaskListArray] = useState([]);
     const [taskStatus, setTaskStatus] = useState(false);
-
-
 
     useEffect(() => {
         const promise = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today', {
@@ -44,7 +40,6 @@ function TodayPage({ userToken }) {
             );
 
             promise.then((response) => {
-                console.log("adicionou");
                 setTaskStatus(taskStatus ? false : true);
             });
             promise.catch((error) => console.log("error#2-TodayPage: ", error.response));
@@ -59,7 +54,6 @@ function TodayPage({ userToken }) {
             );
 
             promise.then((response) => {
-                console.log("removeu");
                 setTaskStatus(taskStatus ? false : true);
             });
             promise.catch((error) => { console.log("error#3-TodayPage: ", error.response); });
@@ -77,8 +71,7 @@ function TodayPage({ userToken }) {
         const percentual = ((selectedsArray.length * 100) / newTaskListTAM).toFixed(2);
         setTaskPercentualDone(percentual);
     }
-
-    if (taskListArray === 0) {
+    if (taskListArray.length === 0) {
         return (
             <>
                 <NavBar />
@@ -96,7 +89,7 @@ function TodayPage({ userToken }) {
 
     return (
         <>
-            <NavBar />
+            <NavBar userInfos={userInfos} />
             <Header>
                 <ContainerWrapper>
                     <div className="title-wrapper">
@@ -121,7 +114,7 @@ function TodayPage({ userToken }) {
                     ))}
                 </ContainerWrapper>
             </Header>
-            <Footer />
+            <Footer taskPercentualDone={taskPercentualDone} />
         </>
     )
 }

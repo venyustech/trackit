@@ -56,8 +56,19 @@ const Container = styled.div`
     }
 `;
 
+const TodayWrapper = styled.button`
+  width: 91px;
+  height: 91px;
+  border-radius: 50%;
+  border: none;
+  background-color: #52b6ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 
 
-export { Container };
+
+export { Container, TodayWrapper };
 

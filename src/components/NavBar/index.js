@@ -3,13 +3,12 @@ import logo from '../../assets/images/trackIt.png'
 
 import { Container } from './styles';
 
-function NavBar() {
-    const userImage = "https://i.imgur.com/qROqde5.png"
+function NavBar({ userInfos }) {
 
     return (
         <Container>
             <img src={logo} alt="logo TrackIt" />
-            <img className="user-image" src={userImage} alt="logo TrackIt" />
+            <img className="user-image" src={userInfos} alt="logo TrackIt" />
         </Container>
     );
 }
