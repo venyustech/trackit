@@ -8,11 +8,13 @@ import { ContainerWrapper, Header, Subtitle, Title, CheckCard } from './styles';
 import DateFormat from '../../components/DateFormat';
 
 function TodayPage({ userToken }) {
-    const [toDoListTAM, setToDoListTAM] = useState('');
-    const [tasksSelectedTAM, setTasksSelectedTAM] = useState(0);
+    const [taskListTAM, setTaskListTAM] = useState('');
+    const [taskSelectedTAM, setTaskSelectedTAM] = useState(0);
+    const [taskPercentualDone, setTaskPercentualDone] = useState(0);
 
-    const [toDoListArray, setToDoListArray] = useState([]);
+    const [taskListArray, setTaskListArray] = useState([]);
     const [taskStatus, setTaskStatus] = useState(false);
+
 
     useEffect(() => {
         const promise = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today', {
@@ -24,13 +26,14 @@ function TodayPage({ userToken }) {
         promise.catch(error => console.log("erro#1-TodayPage: ", error.response));
 
         function handleSuccess(response) {
-            setToDoListArray(response.data)
-            setToDoListTAM(response.data.length)
+            setTaskListArray(response.data)
+            setTaskListTAM(response.data.length)
+            catchSelectedsNumber();
         }
 
     }, [taskStatus])
 
-    function handleTaskStatus(id, status) {
+    function addRemeoveCheck(id, status) {
         if (status === false) {
             const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`, {},
                 {
@@ -57,13 +60,26 @@ function TodayPage({ userToken }) {
             );
 
             promise.then((response) => {
+                console.log("removeu");
                 setTaskStatus(taskStatus ? false : true);
             });
             promise.catch((error) => { console.log("error#3-TodayPage: ", error.response); });
         }
     }
+    function catchSelectedsNumber() {
+        if (taskListTAM !== 0) {
+            const selectedsArray = []
+            taskListArray.forEach(task => {
+                if (task.done === true) {
+                    selectedsArray.push(task.id)
+                }
+            })
+            setTaskSelectedTAM(selectedsArray.length);
+        }
+        setTaskPercentualDone((taskSelectedTAM * 100) / taskListTAM)
+    }
 
-    if (toDoListArray === 0) {
+    if (taskListArray === 0) {
         return (
             <>
                 <NavBar />
@@ -78,9 +94,7 @@ function TodayPage({ userToken }) {
             </>
         )
     }
-    console.log("toDoListArray:", toDoListArray);
-    console.log("tasksSelectedTAM: ", tasksSelectedTAM)
-    console.log("setToDoListTAM:", toDoListTAM);
+    console.log("quantidade/selecionados/percentual: ", taskListTAM, taskSelectedTAM, taskPercentualDone);
 
     return (
         <>
@@ -90,19 +104,19 @@ function TodayPage({ userToken }) {
                     <div className="title-wrapper">
                         <Title><DateFormat />
                         </Title>
-                        <Subtitle>Nenhum hábito concluído ainda</Subtitle>
+                        <Subtitle>{taskPercentualDone}% dos hábitos concluidos</Subtitle>
                     </div>
 
-                    {toDoListArray.map((task) => (
+                    {taskListArray.map((task) => (
 
-                        <div className="tasks-wrapper">
+                        <div className="tasks-wrapper" key={task.id} >
                             <div className="tasks-infos">
                                 <h1>{task.name}</h1>
                                 <p className="current-sequence">Sequência atual: {task.currentSequence} dias</p>
                                 <p className="record">Seu recorde: {task.highestSequence} dias</p>
                             </div>
                             <CheckCard isTaskChecked={task.done}>
-                                <BsCheckSquareFill onClick={() => handleTaskStatus(task.id, task.done)} ></BsCheckSquareFill>
+                                <BsCheckSquareFill onClick={() => addRemeoveCheck(task.id, task.done)} ></BsCheckSquareFill>
                             </CheckCard>
                         </div>
 

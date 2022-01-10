@@ -58,7 +58,7 @@ function GetTasks({ userToken, thereIsNewTask, setThereIsNewTask }) {
                 <TasksWrapper>
                     <TaskCard>
                         {taskList.map((task) =>
-                            <TaskBox>
+                            <TaskBox key={task.id}>
 
                                 <div className="infos">
                                     <Title>{task.name}</Title>
