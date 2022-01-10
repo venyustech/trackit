@@ -1,12 +1,17 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
 import Loader from "react-loader-spinner";
 
 import logo from '../../assets/images/logo.png'
 import { Container, Input, Button, LinkStyled, Loading } from './styles';
+import UserContext, { useAuth } from '../../Providers/auth';
 
-function LoginPage({ setUserToken, setUserInfos }) {
+function LoginPage() {
+
+    const { setUserToken, setUserImage } = useContext(UserContext)
+
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate();
@@ -26,22 +31,20 @@ function LoginPage({ setUserToken, setUserInfos }) {
             email: email,
             password: password,
         });
-        promise.then(response => handleSuccess(response.data))
+        promise.then(response => {
+            setUserToken(response.data.token);
+            setUserImage(response.data.image)
+            setIsLoading(false);
+            setInputLoading("");
+            navigate('/hoje');
+
+        })
         promise.catch((error) => {
             console.log(error.response);
-            alert("Tenta de novo. Tem certeza que tu tem conta?");
+            alert("Tenta de novo. Dados incorreto");
             setIsLoading(false)
             setInputLoading("")
         })
-    }
-
-    function handleSuccess(answer) {
-        setUserToken(answer.token);
-        setUserInfos(answer.image)
-        setIsLoading(false);
-        setInputLoading("");
-        navigate('/hoje');
-
     }
     return (
         <Container>

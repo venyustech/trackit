@@ -16,33 +16,29 @@ const Container = styled.div`
 `;
 
 const Input = styled.input`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    width: 90%;
-
-    margin-bottom: 8px;
+   height: 40px;
+    width: 80%;
+    margin-left: 10%; 
 
     background-color: #FFFFFF;
     color: #222222;
-
+    font-family: 'Lexend Deca', sans-serif;
     font-size:20px;
     line-height: 25px;
+    padding: 14px;
+    margin-bottom: 10px;
     border: 1px solid #D5D5D5;
     border-radius: 5px; 
-    
     ::placeholder {
       color: #DBDBDB;
+      font-family: 'Lexend Deca', sans-serif;
     }
 `;
 
 const Button = styled.button`
-
-    height: 40px;
-    width: 90%;
-
+ height: 40px;
+    width: 80%;
+    margin-left: 10%;
     background-color: #52B6FF;
     color: #FFFFFF;
     font-family: 'Lexend Deca', sans-serif;
@@ -56,7 +52,6 @@ const Button = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 28px;
     cursor: pointer;
 `;
 

@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Footer from '../../components/Footer';
 import NavBar from '../../components/NavBar';
+import UserContext from '../../Providers/auth';
 
 import { Container } from './styles';
 
-function HistoricPage({ taskPercentualDone, userInfos }) {
+function HistoricPage() {
+    const { taskPercentualDone, userImage } = useContext(UserContext);
+
     return (
         <>
-            <NavBar userInfos={userInfos} />
+            <NavBar userImage={userImage} />
             <Container>
                 <h1>Histórico</h1>
                 <h2>Em breve você poderá ver o histórico dos seus hábitos aqui!</h2>

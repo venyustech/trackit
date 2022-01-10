@@ -59,7 +59,7 @@ function SignUpPage() {
           placeholder="foto"
         />
 
-        <Button onClick={() => alert(email)}>Enter</Button>
+        <Button >Enter</Button>
 
       </form>
       <LinkStyled to="/">Já possui conta? Faça login.</LinkStyled>

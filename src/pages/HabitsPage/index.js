@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Footer from '../../components/Footer';
 import NavBar from '../../components/NavBar';
 import { SiAddthis } from 'react-icons/si'
@@ -6,8 +6,10 @@ import { SiAddthis } from 'react-icons/si'
 import { Container, Header, Input, SetNewHabits, Buttons, ButtonsSubmit, ButtonDay, SetTaks } from './styles';
 import axios from 'axios';
 import GetTasks from '../../components/GetTasks';
+import UserContext from '../../Providers/auth';
 
-function HabitsPage({ userToken, taskPercentualDone, userInfos }) {
+function HabitsPage() {
+    const { userToken, taskPercentualDone, userImage } = useContext(UserContext);
     const [thereIsNewTask, setThereIsNewTask] = useState(1);
     const [newHabitDisplay, setNewHabitDisplay] = useState('');
 
@@ -74,7 +76,7 @@ function HabitsPage({ userToken, taskPercentualDone, userInfos }) {
 
     return (
         <>
-            <NavBar userInfos={userInfos} />
+            <NavBar userImage={userImage} />
             <Header>
                 <div className="habits-wrapper">
                     <h1>Meus Habitos</h1>

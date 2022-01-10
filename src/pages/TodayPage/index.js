@@ -1,15 +1,18 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Footer from '../../components/Footer';
 import NavBar from '../../components/NavBar';
 import { BsCheckSquareFill } from 'react-icons/bs'
 
-import { ContainerWrapper, Header, Subtitle, Title, CheckCard } from './styles';
+import { ContainerWrapper, Header, Subtitle, Title, CheckCard, SpanCheck, SpanRecord } from './styles';
 import DateFormat from '../../components/DateFormat';
+import UserContext from '../../Providers/auth';
 
-function TodayPage({ userToken, taskPercentualDone, setTaskPercentualDone, userInfos }) {
+function TodayPage() {
     const [taskListArray, setTaskListArray] = useState([]);
     const [taskStatus, setTaskStatus] = useState(false);
+
+    const { userToken, taskPercentualDone, setTaskPercentualDone, userImage } = useContext(UserContext);
 
     useEffect(() => {
         const promise = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today', {
@@ -72,9 +75,10 @@ function TodayPage({ userToken, taskPercentualDone, setTaskPercentualDone, userI
         setTaskPercentualDone(percentual);
     }
     if (taskListArray.length === 0) {
+        setTaskPercentualDone(0)
         return (
             <>
-                <NavBar />
+                <NavBar userImage={userImage} />
                 <Header>
                     <ContainerWrapper>
                         <div className="title-wrapper">
@@ -82,20 +86,24 @@ function TodayPage({ userToken, taskPercentualDone, setTaskPercentualDone, userI
                         </div>
                     </ContainerWrapper>
                 </Header>
-                <Footer />
+                <Footer taskPercentualDone={taskPercentualDone} />
             </>
         )
     }
-
+    console.log(taskListArray)
     return (
         <>
-            <NavBar userInfos={userInfos} />
+            <NavBar userImage={userImage} />
             <Header>
                 <ContainerWrapper>
                     <div className="title-wrapper">
                         <Title><DateFormat />
                         </Title>
-                        <Subtitle>{taskPercentualDone}% dos hábitos concluidos</Subtitle>
+                        <Subtitle>
+                            <SpanRecord>
+                                {taskPercentualDone}% dos hábitos concluidos
+                            </SpanRecord>
+                        </Subtitle>
                     </div>
 
                     {taskListArray.map((task) => (
@@ -103,8 +111,19 @@ function TodayPage({ userToken, taskPercentualDone, setTaskPercentualDone, userI
                         <div className="tasks-wrapper" key={task.id} >
                             <div className="tasks-infos">
                                 <h1>{task.name}</h1>
-                                <p className="current-sequence">Sequência atual: {task.currentSequence} dias</p>
-                                <p className="record">Seu recorde: {task.highestSequence} dias</p>
+                                <p className="current-sequence"> Sequência atual:
+                                    <SpanCheck isTaskChecked={task.done}>
+                                        <SpanRecord currentSequence={task.currentSequence} highestSequence={task.highestSequence}>
+                                            {task.currentSequence} dias
+                                        </SpanRecord>
+                                    </SpanCheck>
+
+                                </p>
+                                <p className="record">Seu recorde:
+                                    <SpanRecord currentSequence={task.currentSequence} highestSequence={task.highestSequence}>
+                                        {task.highestSequence} dias
+                                    </SpanRecord>
+                                </p>
                             </div>
                             <CheckCard isTaskChecked={task.done}>
                                 <BsCheckSquareFill onClick={() => addRemeoveCheck(task.id, task.done)} ></BsCheckSquareFill>

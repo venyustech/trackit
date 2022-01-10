@@ -57,7 +57,15 @@ const TitleWrapper = styled.div`
 const CheckCard = styled.div`
     color: ${(props) => (props.isTaskChecked ? "#8fc549" : "#EBEBEB")};
 `
+const SpanCheck = styled.span`
+    color: ${(props) => (props.isTaskChecked ? "#8fc549" : "#EBEBEB")};
 
 
+`;
+const SpanRecord = styled.span`
+    color: ${(props) => props.currentSequence === props.highestSequence ? "#8FC549" : "red"};
 
-export { Header, ContainerWrapper, Title, Subtitle, TitleWrapper, CheckCard };
+`
+
+
+export { Header, ContainerWrapper, Title, Subtitle, TitleWrapper, CheckCard, SpanCheck, SpanRecord };
