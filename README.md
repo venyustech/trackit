@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+# TrackIt, acompanhamento de hábitos.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+<img src="https://i.imgur.com/ITazgU1.png" alt="photo of layout trackit app">
 
-In the project directory, you can run:
 
-### `npm start`
+## Sobre:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Neste projeto implementei uma aplicação completa de acompanhamento de hábitos;
+- Com essa ferramenta, o usuário pode acompanhar seus hábitos, criar novos hábitos e ver a porcentagem de conclusão de cada um.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+## Tecnologias
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+As seguintes ferramentas e frameworks foram usados na construção do projeto:
+ 
+#### Front-end:
+![HTML](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+![StyledComponents](https://img.shields.io/badge/Styled--Components-DB7093?style=flat-square&logo=styled-components&logoColor=white)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Requisitos implementados:
+- Aplicação de Layout
+- Login/cadastro
+- Foto do Usuário
+- Barra de Progresso
+- Barra de Progresso em outras telas
+- Tela de hábitos: carregamento de hábitos
+- Tela de hábitos: deletar hábito
+- Tela de hábitos: cadastro de hábito
+- Tela de hábitos: formulário de cadastro de hábito
+- Tela Hoje: titulo e subtítulo
+- Tela Hoje: carregamento de hábitos
+- Tela Hoje: check de hábitos
+- Tela Hoje: recorde
+- Tela Histórico
+- Boas praticas
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Modo do desenvolvedor:
+Para executar isso no modo dev, você deve usar o ambiente React.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Então você tem que:
 
-### `npm run eject`
+ ### Clonar esse repositório:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+$ git clone git@github.com:venyustech/trackit.git
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+ ### Instalar as dependencias:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+$ npm install
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Rodar na sua máquina:
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+$ npm run start
